@@ -1,0 +1,28 @@
+from bs4 import BeautifulSoup as soup 
+from urllib2 import urlopen
+print("ENTER your hackerrank user id(unique)")
+x=raw_input()
+hacker_url="https://www.hackerrank.com/"
+hacker_url=hacker_url+x+"?hr_r=1"
+print(hacker_url)
+uclient=urlopen(hacker_url)
+page_html=uclient.read()
+page_soup=soup(page_html,"html.parser")
+print(soup.prettify(page_soup))
+containers=page_soup.find("h3",{"class":"mlT msB"})
+print(containers.text)
+#a=page_soup.find("p",{"class":"fnt-wt-500 plB break-word"})
+badge = page_soup.find_all('div',class_='d-inline mlR')
+print("MEDALLLS \n")
+print("GOLD   ")
+print(badge[0].text)
+print("   SILVER  ")
+print(badge[1].text)
+print("  BRONZE  ")
+print(badge[2].text)
+#print((a).text)
+sub=page_soup.find("div",{"class":"pull-left psT"})
+#n=len(sub)
+#print (n)
+print(sub)
+uclient.close()
